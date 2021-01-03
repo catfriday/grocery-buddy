@@ -8,12 +8,14 @@ function App() {
   const [list, setList] = useState([])
   const [isEditing, setIsEditing] = useState(false)
   const [editID, setEditID] = useState(null)
-  const [alert, setAlert] = useState({show:true, msg:'hello world', type:'success'})
+  const [alert, setAlert] = useState({show:false, msg:'', type:''})
 
   const handleSubmit = (e) =>{
     e.preventDefault()
     if(!name){
       //display alert
+      // setAlert({show:true, msg: 'please enter value', type: 'danger'})
+      showAlert(true, 'danger', 'please enter value')
     }
     else if(name && isEditing){
       // deal with edit
@@ -23,6 +25,11 @@ function App() {
       setList([...list, newItem])
       setName('')
     }
+  }
+
+  //function below is called in handleSubmit as alternative to using setAlert in handleSubmit
+  const showAlert = (show=false, type='', msg='') =>{
+    setAlert({show, type, msg})
   }
 
   return (<section className='section-center'>
